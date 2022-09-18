@@ -76,6 +76,7 @@ namespace DistributedSaga.AsyncSaga.statemachine
                 // .Then(context => _logger.LogDebug("loan request submitted"))
                 .Then(context => SaveLoanInfo(context.Saga, context))
                 .TransitionTo(LoanPrcessingPending)
+                .RespondAsync(context => context.Init<LoanStatus>(new { LoanApplicationGuid = context.Message.LoanApplicationGuid, State = "in progress" }))
                 .PublishAsync(context => context.Init<IProcessLoan>(new
                 {
                     context.Saga.CustomerGuid,

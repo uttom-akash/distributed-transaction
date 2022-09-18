@@ -51,12 +51,20 @@ public class TransactionController : ControllerBase
     public async Task<int> UseAsyncSaga()
     {
 
-        await _bus.Publish<AsyncLoanRequested>(new
-        {
-            CustomerGuid = Guid.NewGuid(),
-            LoanApplicationGuid = Guid.NewGuid(),
-            Timestamp = DateTime.UtcNow
-        });
+        var status = await _asyncLoanRequestClient
+            .GetResponse<LoanStatus, AsyncLoanRequested>(new
+            {
+                CustomerGuid = Guid.NewGuid(),
+                LoanApplicationGuid = Guid.NewGuid(),
+                Timestamp = DateTime.UtcNow
+            });
+
+        // await _bus.Publish<AsyncLoanRequested>(new
+        // {
+        //     CustomerGuid = Guid.NewGuid(),
+        //     LoanApplicationGuid = Guid.NewGuid(),
+        //     Timestamp = DateTime.UtcNow
+        // });
 
         return 1;
     }

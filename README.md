@@ -1,8 +1,7 @@
-﻿## Distributed Transaction
+﻿### Distributed Transaction
  
  #### Patterns
- - Routing Slip ( masstransit courier )
- - Synchronous Saga
- - Asynchronous Saga
+ - masstransit courier based on routing slip pattern.
+ - masstransit saga statemachine
  
  
